@@ -291,14 +291,14 @@ MonoBehaviour:
   Back_Wheel_Rotation:
   - {x: 0, y: 0, z: 0}
   - {x: 0, y: 0, z: 0}
-  Motor_Torque: 550
+  Motor_Torque: 400
   Max_Steer_Angle: 30
-  BrakeForce: 550
+  BrakeForce: 2000
   Maximum_Speed: 398.8
   handBrakeFrictionMultiplier: 2
   tempo: 0
   enable_boost: 1
-  Boost_Cooldown: 10
+  Boost_Cooldown: 1
   Boost_Amount: 10
   Boost_KeyCode: 304
   Enable_Boost_particles: 0
@@ -738,8 +738,16 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 750726510976462402, guid: 4d1624804e8167f479ab63c5302ff1d5, type: 3}
+      propertyPath: m_Mass
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 750726510976462402, guid: 4d1624804e8167f479ab63c5302ff1d5, type: 3}
+      propertyPath: m_ForwardFriction.m_Stiffness
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 750726510976462402, guid: 4d1624804e8167f479ab63c5302ff1d5, type: 3}
       propertyPath: m_ForwardFriction.m_ExtremumSlip
-      value: 0.25
+      value: 0.1
       objectReference: {fileID: 0}
     - target: {fileID: 750726510976462402, guid: 4d1624804e8167f479ab63c5302ff1d5, type: 3}
       propertyPath: m_SidewaysFriction.m_ExtremumSlip
@@ -751,7 +759,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2369060491348006307, guid: 4d1624804e8167f479ab63c5302ff1d5, type: 3}
       propertyPath: m_Mass
-      value: 696.32
+      value: 900
       objectReference: {fileID: 0}
     - target: {fileID: 4315570180875368916, guid: 4d1624804e8167f479ab63c5302ff1d5, type: 3}
       propertyPath: m_Name
@@ -762,8 +770,16 @@ PrefabInstance:
       value: Fr
       objectReference: {fileID: 0}
     - target: {fileID: 5064654061568696048, guid: 4d1624804e8167f479ab63c5302ff1d5, type: 3}
+      propertyPath: m_Mass
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 5064654061568696048, guid: 4d1624804e8167f479ab63c5302ff1d5, type: 3}
+      propertyPath: m_ForwardFriction.m_Stiffness
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5064654061568696048, guid: 4d1624804e8167f479ab63c5302ff1d5, type: 3}
       propertyPath: m_ForwardFriction.m_ExtremumSlip
-      value: 0.25
+      value: 0.1
       objectReference: {fileID: 0}
     - target: {fileID: 5064654061568696048, guid: 4d1624804e8167f479ab63c5302ff1d5, type: 3}
       propertyPath: m_SidewaysFriction.m_ExtremumSlip
@@ -774,8 +790,16 @@ PrefabInstance:
       value: FL
       objectReference: {fileID: 0}
     - target: {fileID: 7152711881538079191, guid: 4d1624804e8167f479ab63c5302ff1d5, type: 3}
+      propertyPath: m_Mass
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 7152711881538079191, guid: 4d1624804e8167f479ab63c5302ff1d5, type: 3}
+      propertyPath: m_ForwardFriction.m_Stiffness
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7152711881538079191, guid: 4d1624804e8167f479ab63c5302ff1d5, type: 3}
       propertyPath: m_ForwardFriction.m_ExtremumSlip
-      value: 0.25
+      value: 0.1
       objectReference: {fileID: 0}
     - target: {fileID: 7152711881538079191, guid: 4d1624804e8167f479ab63c5302ff1d5, type: 3}
       propertyPath: m_SidewaysFriction.m_ExtremumSlip
@@ -790,8 +814,16 @@ PrefabInstance:
       value: Free Racing Car Gray Variant
       objectReference: {fileID: 0}
     - target: {fileID: 7878892768972602533, guid: 4d1624804e8167f479ab63c5302ff1d5, type: 3}
+      propertyPath: m_Mass
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 7878892768972602533, guid: 4d1624804e8167f479ab63c5302ff1d5, type: 3}
+      propertyPath: m_ForwardFriction.m_Stiffness
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7878892768972602533, guid: 4d1624804e8167f479ab63c5302ff1d5, type: 3}
       propertyPath: m_ForwardFriction.m_ExtremumSlip
-      value: 0.25
+      value: 0.1
       objectReference: {fileID: 0}
     - target: {fileID: 7878892768972602533, guid: 4d1624804e8167f479ab63c5302ff1d5, type: 3}
       propertyPath: m_SidewaysFriction.m_ExtremumSlip
