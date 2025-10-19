@@ -19,18 +19,23 @@ public class CheckpointTimer : MonoBehaviour
     public float currentLapTime = 0f;
     public float currentDeltaTime = 0f;
     public float lastLapDeltaTime = 0f;
-    private int lastCurrentSplitCount = 0;
+    private bool timerRunning = false;
 
     void Start()
     {
-        lastTimestamp = Time.time;
-        lapTimestamp = Time.time;
         lapCount = 0;
         lastIndex = -1;
+        timerRunning = false;
     }
 
     void Update()
     {
+        if (!timerRunning)
+        {
+            currentLapTime = 0f;
+            return;
+        }
+
         float completed = currentSplits.Sum();
         float openSegment = Time.time - lastTimestamp;
         currentLapTime = completed + openSegment;
@@ -40,6 +45,22 @@ public class CheckpointTimer : MonoBehaviour
     {
         float now = Time.time;
         int expected = (lastIndex + 1) % Mathf.Max(1, Checkpoints.Count);
+
+        if (!timerRunning)
+        {
+            if (index != expected)
+            {
+                Debug.Log($"Ignored checkpoint {index} (expected {expected} to start).");
+                return;
+            }
+
+            timerRunning = true;
+            lastTimestamp = now;
+            lapTimestamp = now;
+            lastIndex = index;
+            Debug.Log($"Timer started at checkpoint {index}");
+            return;
+        }
 
         if (index != expected)
         {
@@ -56,15 +77,9 @@ public class CheckpointTimer : MonoBehaviour
         if (recordedIndex >= 0)
         {
             if (bestLapSplits.Count > recordedIndex)
-            {
                 currentDeltaTime = currentSplits[recordedIndex] - bestLapSplits[recordedIndex];
-            }
             else
-            {
                 currentDeltaTime = currentSplits[recordedIndex];
-            }
-
-            lastCurrentSplitCount = currentSplits.Count;
             Debug.Log($"New split recorded. Current Delta Time for split {recordedIndex}: {currentDeltaTime:F3}s");
         }
 
@@ -92,6 +107,10 @@ public class CheckpointTimer : MonoBehaviour
             lapCount++;
             currentSplits.Clear();
             lapTimestamp = now;
+
+            lastIndex = 0;
+            lastTimestamp = now;
+            timerRunning = true;
         }
     }
 
