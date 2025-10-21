@@ -101,3 +101,7 @@ Assets/CartoonTrackSpielberg/Textures/gravel_trap_spielberg_normal.psd
 Assets/CartoonTrackSpielberg/Textures/road_spielberg.psd
 Assets/CartoonTrackSpielberg/Textures/SPIELBERG.psd
 Assets/CartoonTrackSpielberg/Textures/SPIELBERG_SPECULAR.psd
+.vscode/extensions.json
+.vscode/launch.json
+.vscode/settings.json
+.DS_Store
