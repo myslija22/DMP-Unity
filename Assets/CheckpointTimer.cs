@@ -15,7 +15,6 @@ public class CheckpointTimer : MonoBehaviour
     public List<float> bestLapSplits = new List<float>();
     public float bestLapTime = Mathf.Infinity;
     public float lastLapTime = Mathf.Infinity;
-    //
 
     public float currentLapTime = 0f;
     public float currentDeltaTime = 0f;
