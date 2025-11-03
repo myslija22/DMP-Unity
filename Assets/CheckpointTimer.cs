@@ -1,25 +1,28 @@
 using UnityEngine;
+using UnityEngine.UI;
 using System.Collections.Generic;
-using System.Linq;
 
 public class CheckpointTimer : MonoBehaviour
 {
     public List<GameObject> Checkpoints = new List<GameObject>();
 
-    private float lastTimestamp;
-    private float lapTimestamp;
+    private float lapStartTime;
     private int lapCount;
     private int lastIndex = -1;
-    public List<float> splitTimes = new List<float>();
-    public List<float> currentSplits = new List<float>();
-    public List<float> bestLapSplits = new List<float>();
+    private bool timerRunning = false;
+
+    public List<float> currentCheckpointTimes = new List<float>();
+
+    public List<float> bestCheckpointTimes = new List<float>();
     public float bestLapTime = Mathf.Infinity;
     public float lastLapTime = Mathf.Infinity;
 
     public float currentLapTime = 0f;
     public float currentDeltaTime = 0f;
     public float lastLapDeltaTime = 0f;
-    private bool timerRunning = false;
+
+    public Slider positiveDeltaSlider;
+    public Slider negativeDeltaSlider;
 
     void Start()
     {
@@ -36,9 +39,22 @@ public class CheckpointTimer : MonoBehaviour
             return;
         }
 
-        float completed = currentSplits.Sum();
-        float openSegment = Time.time - lastTimestamp;
-        currentLapTime = completed + openSegment;
+        currentLapTime = Time.time - lapStartTime;
+
+        if (currentDeltaTime >= 0)
+        {
+            positiveDeltaSlider.gameObject.SetActive(true);
+            negativeDeltaSlider.gameObject.SetActive(false);
+            positiveDeltaSlider.value = Mathf.Min(currentDeltaTime / 1f, 1f);
+        }
+        else
+        {
+            positiveDeltaSlider.gameObject.SetActive(false);
+            negativeDeltaSlider.gameObject.SetActive(true);
+            negativeDeltaSlider.value = Mathf.Min(-currentDeltaTime / 1f, 1f);
+        }
+
+
     }
 
     public void OnCheckpointTriggered(int index)
@@ -55,10 +71,10 @@ public class CheckpointTimer : MonoBehaviour
             }
 
             timerRunning = true;
-            lastTimestamp = now;
-            lapTimestamp = now;
+            lapStartTime = now;
             lastIndex = index;
-            Debug.Log($"Timer started at checkpoint {index}");
+            currentCheckpointTimes.Clear();
+            Debug.Log($"Lap started at checkpoint {index}");
             return;
         }
 
@@ -68,35 +84,33 @@ public class CheckpointTimer : MonoBehaviour
             return;
         }
 
-        float segment = now - lastTimestamp;
-        splitTimes.Add(segment);
-        currentSplits.Add(segment);
-        Debug.Log($"Checkpoint {index} hit. Segment time: {segment:F3}s");
+        float checkpointTime = now - lapStartTime;
+        currentCheckpointTimes.Add(checkpointTime);
+        Debug.Log($"Checkpoint {index} hit at {checkpointTime:F3}s");
 
-        int recordedIndex = currentSplits.Count - 1;
-        if (recordedIndex >= 0)
+        int recordedIndex = currentCheckpointTimes.Count - 1;
+        if (bestCheckpointTimes.Count > recordedIndex)
         {
-            if (bestLapSplits.Count > recordedIndex)
-                currentDeltaTime = currentSplits[recordedIndex] - bestLapSplits[recordedIndex];
-            else
-                currentDeltaTime = currentSplits[recordedIndex];
-            Debug.Log($"New split recorded. Current Delta Time for split {recordedIndex}: {currentDeltaTime:F3}s");
+            currentDeltaTime = currentCheckpointTimes[recordedIndex] - bestCheckpointTimes[recordedIndex];
         }
+        else
+        {
+            currentDeltaTime = currentCheckpointTimes[recordedIndex];
+        }
+        Debug.Log($"Delta at checkpoint {recordedIndex}: {currentDeltaTime:F3}s");
 
-        lastTimestamp = now;
         lastIndex = index;
 
-        if (index == 0 && currentSplits.Count >= Checkpoints.Count)
+        if (index == 0 && currentCheckpointTimes.Count >= Checkpoints.Count)
         {
-            float lapTime = currentSplits.Sum();
-            lastLapTime = lapTime;
-            Debug.Log($"Lap {lapCount} completed: {lapTime:F3}s");
+            lastLapTime = checkpointTime;
+            Debug.Log($"Lap {lapCount} completed: {lastLapTime:F3}s");
 
-            if (lapTime < bestLapTime)
+            if (lastLapTime < bestLapTime)
             {
-                bestLapTime = lapTime;
-                bestLapSplits = new List<float>(currentSplits);
-                Debug.Log($"New best lap: {bestLapTime:F3}s (splits saved)");
+                bestLapTime = lastLapTime;
+                bestCheckpointTimes = new List<float>(currentCheckpointTimes);
+                Debug.Log($"New best lap: {bestLapTime:F3}s");
             }
 
             if (bestLapTime < Mathf.Infinity)
@@ -105,17 +119,17 @@ public class CheckpointTimer : MonoBehaviour
                 lastLapDeltaTime = 0f;
 
             lapCount++;
-            currentSplits.Clear();
-            lapTimestamp = now;
 
+            lapStartTime = now;
+            currentCheckpointTimes.Clear();
             lastIndex = 0;
-            lastTimestamp = now;
             timerRunning = true;
+            Debug.Log("New lap started immediately.");
         }
     }
 
-    public List<float> GetCurrentSplits() => new List<float>(currentSplits);
-    public List<float> GetBestSplits() => new List<float>(bestLapSplits);
+    public List<float> GetCurrentCheckpointTimes() => new List<float>(currentCheckpointTimes);
+    public List<float> GetBestCheckpointTimes() => new List<float>(bestCheckpointTimes);
     public float GetBestLapTime() => bestLapTime;
     public float GetLastLapTime() => lastLapTime;
     public float GetCurrentLapTime() => currentLapTime;
