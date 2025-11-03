@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 using System.Collections.Generic;
 
 public class CheckpointTimer : MonoBehaviour
@@ -24,6 +25,8 @@ public class CheckpointTimer : MonoBehaviour
     public Slider positiveDeltaSlider;
     public Slider negativeDeltaSlider;
 
+    public TMP_Text deltaText;
+
     void Start()
     {
         lapCount = 0;
@@ -41,16 +44,18 @@ public class CheckpointTimer : MonoBehaviour
 
         currentLapTime = Time.time - lapStartTime;
 
+        deltaText.text = currentDeltaTime >= 0 ? $"+{currentDeltaTime:F3}s" : $"{currentDeltaTime:F3}s";
+
+
+
         if (currentDeltaTime >= 0)
         {
-            positiveDeltaSlider.gameObject.SetActive(true);
-            negativeDeltaSlider.gameObject.SetActive(false);
+            negativeDeltaSlider.value = 0f;
             positiveDeltaSlider.value = Mathf.Min(currentDeltaTime / 1f, 1f);
         }
         else
         {
-            positiveDeltaSlider.gameObject.SetActive(false);
-            negativeDeltaSlider.gameObject.SetActive(true);
+            positiveDeltaSlider.value = 0f;
             negativeDeltaSlider.value = Mathf.Min(-currentDeltaTime / 1f, 1f);
         }
 

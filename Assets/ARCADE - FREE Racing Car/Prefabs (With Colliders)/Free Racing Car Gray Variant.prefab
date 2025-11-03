@@ -61,12 +61,20 @@ PrefabInstance:
       value: Free Racing Car Gray Variant
       objectReference: {fileID: 0}
     - target: {fileID: 7495443279060062592, guid: 133308cdb8794744caaef026bde9e1f0, type: 3}
+      propertyPath: m_Mass
+      value: 800.01
+      objectReference: {fileID: 0}
+    - target: {fileID: 7495443279060062592, guid: 133308cdb8794744caaef026bde9e1f0, type: 3}
       propertyPath: m_ImplicitCom
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7495443279060062592, guid: 133308cdb8794744caaef026bde9e1f0, type: 3}
       propertyPath: m_CenterOfMass.y
-      value: 37
+      value: 0.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 7495443279060062592, guid: 133308cdb8794744caaef026bde9e1f0, type: 3}
+      propertyPath: m_CenterOfMass.z
+      value: 0.17
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
