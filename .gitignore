@@ -105,3 +105,9 @@ Assets/CartoonTrackSpielberg/Textures/SPIELBERG_SPECULAR.psd
 .vscode/launch.json
 .vscode/settings.json
 .DS_Store
+.plastic/fs_beacon
+.plastic/plastic.changes
+.plastic/plastic.wktree
+.plastic/plastic.changes
+.plastic/plastic.wktree
+*.changes
