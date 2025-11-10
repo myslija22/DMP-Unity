@@ -336,7 +336,11 @@ public class Car_Controller : MonoBehaviour
         {
             foreach (WheelCollider Wheel in Front_Wheels)
             {
-                Wheel.steerAngle = Input.GetAxis("Horizontal") * Max_Steer_Angle; //Turn the wheels
+                float speedFactor = Mathf.Clamp01(Car_Speed_KPH / Maximum_Speed);
+
+                float adjustedMaxSteerAngle = Max_Steer_Angle * Mathf.Lerp(1f, 0.2f, speedFactor);
+
+                Wheel.steerAngle = Input.GetAxis("Horizontal") * adjustedMaxSteerAngle; //Turn the wheels
             }
         }
 
