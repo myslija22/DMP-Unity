@@ -18,6 +18,8 @@ public class CheckpointTimer : MonoBehaviour
     public float bestLapTime = Mathf.Infinity;
     public float lastLapTime = Mathf.Infinity;
 
+    public List<float> lastLapTimes = new List<float>();
+
     public float currentLapTime = 0f;
     public float currentDeltaTime = 0f;
     public float lastLapDeltaTime = 0f;
@@ -110,6 +112,8 @@ public class CheckpointTimer : MonoBehaviour
         {
             lastLapTime = checkpointTime;
             Debug.Log($"Lap {lapCount} completed: {lastLapTime:F3}s");
+
+            lastLapTimes.Add(lastLapTime);
 
             if (lastLapTime < bestLapTime)
             {
