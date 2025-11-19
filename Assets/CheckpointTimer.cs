@@ -29,11 +29,22 @@ public class CheckpointTimer : MonoBehaviour
 
     public TMP_Text deltaText;
 
+
+
+    public FMODUnity.StudioEventEmitter emitter;
+
+
+
+
+
+
+
     void Start()
     {
         lapCount = 0;
         lastIndex = -1;
         timerRunning = false;
+
     }
 
     void Update()
@@ -66,6 +77,7 @@ public class CheckpointTimer : MonoBehaviour
 
     public void OnCheckpointTriggered(int index)
     {
+        emitter.SetParameter("Parameter 2", 1);
         float now = Time.time;
         int expected = (lastIndex + 1) % Mathf.Max(1, Checkpoints.Count);
 
