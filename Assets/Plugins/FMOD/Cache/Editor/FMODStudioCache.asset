@@ -15,7 +15,7 @@ MonoBehaviour:
   Path: ../../FirstFmod/Build/Desktop/Master.strings.bank
   Name: Master.strings
   StudioPath: bank:/Master.strings
-  lastModified: 638991819351699520
+  lastModified: 638996810930401999
   FileSizes:
   - Name: Desktop
     Value: 874
@@ -71,7 +71,7 @@ MonoBehaviour:
   StringsBanks:
   - {fileID: -7284998013710010762}
   cacheVersion: 131856
-  cacheTime: 638991819351699520
+  cacheTime: 638996810930401999
   SerializableEventsDict:
   - key: event:/BackgroundTechno
     index: 0
@@ -117,8 +117,8 @@ MonoBehaviour:
   Path: ../../FirstFmod/Build/Desktop/Master.bank
   Name: Master
   StudioPath: bank:/Master
-  lastModified: 638991819351687830
+  lastModified: 638996810930374621
   FileSizes:
   - Name: Desktop
-    Value: 723648
+    Value: 720192
   Exists: 1
