@@ -5,6 +5,13 @@ using System.Collections.Generic;
 
 public class CheckpointTimer : MonoBehaviour
 {
+    [Header("Race Management")]
+    public GameObject startMenuUI;
+    public GameObject inGameUI;
+    public Car_Controller carController;
+    public Rigidbody carRigidbody;
+
+    [Header("Checkpoint System")]
     public List<GameObject> Checkpoints = new List<GameObject>();
 
     private float lapStartTime;
@@ -29,15 +36,7 @@ public class CheckpointTimer : MonoBehaviour
 
     public TMP_Text deltaText;
 
-
-
     public FMODUnity.StudioEventEmitter emitter;
-
-
-
-
-
-
 
     void Start()
     {
@@ -45,7 +44,10 @@ public class CheckpointTimer : MonoBehaviour
         lastIndex = -1;
         timerRunning = false;
 
+        PrepareRace();
     }
+
+    // -------------------------------------
 
     void Update()
     {
@@ -59,8 +61,6 @@ public class CheckpointTimer : MonoBehaviour
 
         deltaText.text = currentDeltaTime >= 0 ? $"+{currentDeltaTime:F3}s" : $"{currentDeltaTime:F3}s";
 
-
-
         if (currentDeltaTime >= 0)
         {
             negativeDeltaSlider.value = 0f;
@@ -71,9 +71,40 @@ public class CheckpointTimer : MonoBehaviour
             positiveDeltaSlider.value = 0f;
             negativeDeltaSlider.value = Mathf.Min(-currentDeltaTime / 1f, 1f);
         }
-
-
     }
+
+    // -------------------------------------
+
+    public void PrepareRace()
+    {
+        if (startMenuUI != null) startMenuUI.SetActive(true);
+
+        if (inGameUI != null) inGameUI.SetActive(false);
+
+        Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.None;
+
+        if (carController != null) carController.enabled = false;
+
+        if (carRigidbody != null) carRigidbody.isKinematic = true;
+    }
+
+    // -------------------------------------
+    public void StartRace()
+    {
+        if (startMenuUI != null) startMenuUI.SetActive(false);
+
+        if (inGameUI != null) inGameUI.SetActive(true);
+
+        Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Locked;
+
+        if (carRigidbody != null) carRigidbody.isKinematic = false;
+
+        if (carController != null) carController.enabled = true;
+    }
+
+    // -------------------------------------
 
     public void OnCheckpointTriggered(int index)
     {
@@ -148,6 +179,8 @@ public class CheckpointTimer : MonoBehaviour
             Debug.Log("New lap started immediately.");
         }
     }
+
+    // -------------------------------------
 
     public List<float> GetCurrentCheckpointTimes() => new List<float>(currentCheckpointTimes);
     public List<float> GetBestCheckpointTimes() => new List<float>(bestCheckpointTimes);
