@@ -5,6 +5,9 @@ using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using TMPro;
 using System.Linq;
+using FMOD.Studio;
+using UnityEngine.Rendering;
+using System;
 
 public class Car_Controller : MonoBehaviour
 {
@@ -32,6 +35,13 @@ public class Car_Controller : MonoBehaviour
     public float Max_Steer_Angle = 25f; //The Maximum Steer Angle for the front wheels
     public float BrakeForce = 150f; //The brake force of the wheels
     public float Maximum_Speed; //The top speed of the car
+
+    [Space(15)]
+
+    [Header("Audio Settings")]
+
+    public FMODUnity.StudioEventEmitter engineEmitter; //Engine sound emitter
+
 
     [Space(15)]
 
@@ -273,6 +283,7 @@ public class Car_Controller : MonoBehaviour
 
     public void FixedUpdate()
     {
+
         //Turning car off
         if (Input.GetKeyDown(Car_Off_Key) && (Car_Speed_KPH >= 0 && Car_Speed_KPH <= 1.5f) && Use_Car_States)
         { //if the car off key has been pressed and the car speed is 0 and the "use car states" is true
@@ -439,6 +450,49 @@ public class Car_Controller : MonoBehaviour
                 SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex); //Restart the current scene
             }
         }
+
+
+        float Rpm = 0f;
+        float minRpm = 0.7f;
+        float maxRpm = 1f;
+        float absSpeed = Mathf.Abs(Car_Speed_KPH);
+
+
+        if (absSpeed < 50)
+        {
+            Rpm = Mathf.Lerp(0, maxRpm, absSpeed / 50f);
+        }
+        else if (absSpeed < 100)
+        {
+            Rpm = Mathf.Lerp(minRpm, maxRpm, (absSpeed - 50f) / (100f - 50f));
+        }
+        else if (absSpeed < 130)
+        {
+            Rpm = Mathf.Lerp(minRpm, maxRpm, (absSpeed - 100f) / (130f - 100f));
+        }
+        else if (absSpeed < 160)
+        {
+            Rpm = Mathf.Lerp(minRpm, maxRpm, (absSpeed - 130f) / (160f - 130f));
+        }
+        else if (absSpeed < 180)
+        {
+            Rpm = Mathf.Lerp(minRpm, maxRpm, (absSpeed - 160f) / (180f - 160f));
+        }
+        else
+        {
+            Rpm = Mathf.Lerp(minRpm, maxRpm, (absSpeed - 180f) / (200f - 180f));
+        }
+
+
+
+        if (engineEmitter != null)
+        {
+            engineEmitter.SetParameter("RPM", Rpm);
+            Debug.Log(Rpm);
+        }
+
+
+
 
         //Rotating The Wheels Meshes so they have the same position and rotation as the wheel colliders
         var pos = Vector3.zero; //position value (temporary)
