@@ -15,10 +15,34 @@ MonoBehaviour:
   Path: ../../FirstFmod/Build/Desktop/Master.strings.bank
   Name: Master.strings
   StudioPath: bank:/Master.strings
-  lastModified: 639002871604418551
+  lastModified: 639014300421727538
   FileSizes:
   - Name: Desktop
-    Value: 930
+    Value: 974
+  Exists: 1
+--- !u!114 &-6536281791929485061
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/BackgroundUkg/Main Menu
+  m_EditorClassIdentifier: FMODUnityEditor::FMODUnity.EditorParamRef
+  Name: Main Menu
+  StudioPath: 
+  Min: 0
+  Max: 2
+  Default: 0
+  ID:
+    data1: 2176220288
+    data2: 2502876242
+  Type: 1
+  IsGlobal: 0
+  Labels: []
   Exists: 1
 --- !u!114 &-3091354411077493011
 MonoBehaviour:
@@ -66,13 +90,14 @@ MonoBehaviour:
   EditorEvents:
   - {fileID: -3091354411077493011}
   - {fileID: 1887422167393442836}
+  - {fileID: 8613505719137787723}
   EditorParameters: []
   MasterBanks:
   - {fileID: 5370410399465721139}
   StringsBanks:
   - {fileID: -7284998013710010762}
   cacheVersion: 131856
-  cacheTime: 639002871604418551
+  cacheTime: 639014300421727538
   SerializableEventsDict:
   - key: event:/BackgroundTechno
     index: 0
@@ -116,9 +141,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
-  m_Name: parameter:/BackgroundTechno/Parameter 2
+  m_Name: parameter:/BackgroundTechno/Main Menu
   m_EditorClassIdentifier: FMODUnityEditor::FMODUnity.EditorParamRef
-  Name: Parameter 2
+  Name: Main Menu
   StudioPath: 
   Min: 0
   Max: 2
@@ -172,8 +197,36 @@ MonoBehaviour:
   Path: ../../FirstFmod/Build/Desktop/Master.bank
   Name: Master
   StudioPath: bank:/Master
-  lastModified: 639002871604408675
+  lastModified: 639014300421705520
   FileSizes:
   - Name: Desktop
-    Value: 1018336
+    Value: 2926592
   Exists: 1
+--- !u!114 &8613505719137787723
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/BackgroundUkg
+  m_EditorClassIdentifier: FMODUnityEditor::FMODUnity.EditorEventRef
+  Path: event:/BackgroundUkg
+  Guid:
+    Data1: 1599699681
+    Data2: 1195394581
+    Data3: -610022747
+    Data4: -939599236
+  Banks:
+  - {fileID: 5370410399465721139}
+  IsStream: 1
+  Is3D: 0
+  IsOneShot: 0
+  Parameters:
+  - {fileID: -6536281791929485061}
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 139458

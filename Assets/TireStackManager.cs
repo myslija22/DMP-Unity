@@ -11,6 +11,8 @@ public class TireStackManager : MonoBehaviour
             hasCollided = true;
 
             Destroy(gameObject, 30f);
+
+            Debug.Log("Tire stack collided with player and will be destroyed in 30 seconds.");
         }
     }
 }

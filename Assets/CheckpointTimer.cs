@@ -87,6 +87,8 @@ public class CheckpointTimer : MonoBehaviour
     {
         Time.timeScale = 0f;
 
+        emitter.SetParameter("Main Menu", 1);
+
         if (startMenuUI != null) startMenuUI.SetActive(true);
 
         if (inGameUI != null) inGameUI.SetActive(false);
@@ -99,21 +101,23 @@ public class CheckpointTimer : MonoBehaviour
     // -------------------------------------
     public void StartRace()
     {
+        Time.timeScale = 1f;
+
+        emitter.SetParameter("Main Menu", 2);
+
         if (startMenuUI != null) startMenuUI.SetActive(false);
 
         if (inGameUI != null) inGameUI.SetActive(true);
 
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
-
-        Time.timeScale = 1f;
     }
 
     // -------------------------------------
 
     public void OnCheckpointTriggered(int index)
     {
-        emitter.SetParameter("Parameter 2", 1);
+
         float now = Time.time;
         int expected = (lastIndex + 1) % Mathf.Max(1, Checkpoints.Count);
 
