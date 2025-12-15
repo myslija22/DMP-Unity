@@ -488,7 +488,7 @@ public class Car_Controller : MonoBehaviour
         if (engineEmitter != null)
         {
             engineEmitter.SetParameter("RPM", Rpm);
-            Debug.Log(Rpm);
+            //Debug.Log(Rpm);
         }
 
 

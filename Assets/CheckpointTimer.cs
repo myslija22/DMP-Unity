@@ -44,6 +44,8 @@ public class CheckpointTimer : MonoBehaviour
         lastIndex = -1;
         timerRunning = false;
 
+        LoadBestTimes();
+
         PrepareRace();
     }
 
@@ -51,13 +53,14 @@ public class CheckpointTimer : MonoBehaviour
 
     void Update()
     {
-        if (!timerRunning)
+        if (timerRunning)
+        {
+            currentLapTime = Time.time - lapStartTime;
+        }
+        else
         {
             currentLapTime = 0f;
-            return;
         }
-
-        currentLapTime = Time.time - lapStartTime;
 
         deltaText.text = currentDeltaTime >= 0 ? $"+{currentDeltaTime:F3}s" : $"{currentDeltaTime:F3}s";
 
@@ -71,12 +74,19 @@ public class CheckpointTimer : MonoBehaviour
             positiveDeltaSlider.value = 0f;
             negativeDeltaSlider.value = Mathf.Min(-currentDeltaTime / 1f, 1f);
         }
+
+        if (Input.GetKey(KeyCode.Escape))
+        {
+            PrepareRace();
+        }
     }
 
     // -------------------------------------
 
     public void PrepareRace()
     {
+        Time.timeScale = 0f;
+
         if (startMenuUI != null) startMenuUI.SetActive(true);
 
         if (inGameUI != null) inGameUI.SetActive(false);
@@ -84,9 +94,6 @@ public class CheckpointTimer : MonoBehaviour
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.None;
 
-        if (carController != null) carController.enabled = false;
-
-        if (carRigidbody != null) carRigidbody.isKinematic = true;
     }
 
     // -------------------------------------
@@ -99,9 +106,7 @@ public class CheckpointTimer : MonoBehaviour
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
 
-        if (carRigidbody != null) carRigidbody.isKinematic = false;
-
-        if (carController != null) carController.enabled = true;
+        Time.timeScale = 1f;
     }
 
     // -------------------------------------
@@ -162,6 +167,9 @@ public class CheckpointTimer : MonoBehaviour
             {
                 bestLapTime = lastLapTime;
                 bestCheckpointTimes = new List<float>(currentCheckpointTimes);
+
+                SaveBestTimes();
+
                 Debug.Log($"New best lap: {bestLapTime:F3}s");
             }
 
@@ -187,4 +195,32 @@ public class CheckpointTimer : MonoBehaviour
     public float GetBestLapTime() => bestLapTime;
     public float GetLastLapTime() => lastLapTime;
     public float GetCurrentLapTime() => currentLapTime;
+
+    private void SaveBestTimes()
+    {
+        PlayerPrefs.SetFloat("BestLapTime", bestLapTime);
+
+        PlayerPrefs.SetInt("BestCheckpointCount", bestCheckpointTimes.Count);
+        for (int i = 0; i < bestCheckpointTimes.Count; i++)
+        {
+            PlayerPrefs.SetFloat($"BestCheckpoint_{i}", bestCheckpointTimes[i]);
+        }
+
+        PlayerPrefs.Save();
+        Debug.Log("Saved best times");
+    }
+
+    private void LoadBestTimes()
+    {
+        bestLapTime = PlayerPrefs.GetFloat("BestLapTime", Mathf.Infinity);
+
+        bestCheckpointTimes.Clear();
+        int count = PlayerPrefs.GetInt("BestCheckpointCount", 0);
+
+        for (int i = 0; i < count; i++)
+        {
+            float time = PlayerPrefs.GetFloat($"BestCheckpoint_{i}", 0f);
+            bestCheckpointTimes.Add(time);
+        }
+    }
 }
