@@ -15,10 +15,10 @@ MonoBehaviour:
   Path: ../../FirstFmod/Build/Desktop/Master.strings.bank
   Name: Master.strings
   StudioPath: bank:/Master.strings
-  lastModified: 639033061275492323
+  lastModified: 639041597183750813
   FileSizes:
   - Name: Desktop
-    Value: 1010
+    Value: 1046
   Exists: 1
 --- !u!114 &-6536281791929485061
 MonoBehaviour:
@@ -92,13 +92,14 @@ MonoBehaviour:
   - {fileID: 1887422167393442836}
   - {fileID: 8613505719137787723}
   - {fileID: 1253788434533493551}
+  - {fileID: 7379296358568456799}
   EditorParameters: []
   MasterBanks:
   - {fileID: 5370410399465721139}
   StringsBanks:
   - {fileID: -7284998013710010762}
   cacheVersion: 131856
-  cacheTime: 639033061275492323
+  cacheTime: 639041597183750813
   SerializableEventsDict:
   - key: event:/BackgroundTechno
     index: 0
@@ -108,6 +109,8 @@ MonoBehaviour:
     index: 2
   - key: event:/Radio
     index: 3
+  - key: event:/Arab
+    index: 4
 --- !u!114 &1253788434533493551
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -229,11 +232,38 @@ MonoBehaviour:
   Path: ../../FirstFmod/Build/Desktop/Master.bank
   Name: Master
   StudioPath: bank:/Master
-  lastModified: 639033061275475194
+  lastModified: 639041597183718833
   FileSizes:
   - Name: Desktop
-    Value: 5701408
+    Value: 5716000
   Exists: 1
+--- !u!114 &7379296358568456799
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Arab
+  m_EditorClassIdentifier: FMODUnityEditor::FMODUnity.EditorEventRef
+  Path: event:/Arab
+  Guid:
+    Data1: -822569003
+    Data2: 1306394823
+    Data3: -1206930012
+    Data4: 807202971
+  Banks:
+  - {fileID: 5370410399465721139}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
 --- !u!114 &8613505719137787723
 MonoBehaviour:
   m_ObjectHideFlags: 0
