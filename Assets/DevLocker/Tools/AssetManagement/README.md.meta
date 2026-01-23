@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: ba68915c5764e064087ff9ff77242eec
+TextScriptImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 170616
+  packageName: Multi-Rename Tool
+  packageVersion: 1.1.6
+  assetPath: Assets/DevLocker/Tools/AssetManagement/README.md
+  uploadId: 599561

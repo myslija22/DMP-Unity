@@ -36,6 +36,8 @@ public class CheckpointTimer : MonoBehaviour
 
     public TMP_Text deltaText;
 
+    public TMP_Text lapTimesListText;
+
     public FMODUnity.StudioEventEmitter emitter;
 
     void Start()
@@ -45,6 +47,8 @@ public class CheckpointTimer : MonoBehaviour
         timerRunning = false;
 
         LoadBestTimes();
+        LoadLastLapTimes();
+        UpdateLapTimesUI();
 
         PrepareRace();
     }
@@ -86,6 +90,8 @@ public class CheckpointTimer : MonoBehaviour
     public void PrepareRace()
     {
         Time.timeScale = 0f;
+
+        UpdateLapTimesUI();
 
         emitter.SetParameter("Main Menu", 1);
 
@@ -167,6 +173,13 @@ public class CheckpointTimer : MonoBehaviour
 
             lastLapTimes.Add(lastLapTime);
 
+            if (lastLapTimes.Count > 10)
+            {
+                lastLapTimes.RemoveAt(0);
+            }
+            SaveLastLapTimes();
+            UpdateLapTimesUI();
+
             if (lastLapTime < bestLapTime)
             {
                 bestLapTime = lastLapTime;
@@ -200,6 +213,42 @@ public class CheckpointTimer : MonoBehaviour
     public float GetLastLapTime() => lastLapTime;
     public float GetCurrentLapTime() => currentLapTime;
 
+    private void UpdateLapTimesUI()
+    {
+        if (lapTimesListText == null) return;
+
+        string textOutput = "Last 10 Laps:\n";
+
+        for (int i = lastLapTimes.Count - 1; i >= 0; i--)
+        {
+            textOutput += $"{lastLapTimes[i]:F3}s\n";
+        }
+
+        lapTimesListText.text = textOutput;
+    }
+
+    private void SaveLastLapTimes()
+    {
+        PlayerPrefs.SetInt("LastLapTimesCount", lastLapTimes.Count);
+        for (int i = 0; i < lastLapTimes.Count; i++)
+        {
+            PlayerPrefs.SetFloat($"LastLapTimes_{i}", lastLapTimes[i]);
+        }
+        PlayerPrefs.Save();
+    }
+
+    private void LoadLastLapTimes()
+    {
+        lastLapTimes.Clear();
+        int count = PlayerPrefs.GetInt("LastLapTimesCount", 0);
+
+        for (int i = 0; i < count; i++)
+        {
+            float time = PlayerPrefs.GetFloat($"LastLapTimes_{i}", 0f);
+            lastLapTimes.Add(time);
+        }
+    }
+
     private void SaveBestTimes()
     {
         PlayerPrefs.SetFloat("BestLapTime", bestLapTime);
@@ -220,11 +269,11 @@ public class CheckpointTimer : MonoBehaviour
 
         bestCheckpointTimes.Clear();
         int count = PlayerPrefs.GetInt("BestCheckpointCount", 0);
-
         for (int i = 0; i < count; i++)
         {
             float time = PlayerPrefs.GetFloat($"BestCheckpoint_{i}", 0f);
             bestCheckpointTimes.Add(time);
         }
+        Debug.Log("Loaded best times");
     }
 }
