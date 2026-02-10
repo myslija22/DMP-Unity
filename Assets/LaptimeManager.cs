@@ -9,6 +9,7 @@ public class LaptimeManager : MonoBehaviour
 
 
 
+
     void Start()
     {
 
@@ -25,7 +26,7 @@ public class LaptimeManager : MonoBehaviour
         }
         else
         {
-            bestLaptimeText.text = "Best Laptime: " + checkpointTimer.bestLapTime.ToString("F3") + "s";
+            bestLaptimeText.text = "Best Laptime: " + checkpointTimer.FormatTime(checkpointTimer.bestLapTime);
         }
 
         if (checkpointTimer.lastLapTime == Mathf.Infinity)
@@ -34,7 +35,7 @@ public class LaptimeManager : MonoBehaviour
         }
         else
         {
-            lastLaptimeText.text = "Last Laptime: " + checkpointTimer.lastLapTime.ToString("F3") + "s";
+            lastLaptimeText.text = "Last Laptime: " + checkpointTimer.FormatTime(checkpointTimer.lastLapTime);
         }
     }
 }

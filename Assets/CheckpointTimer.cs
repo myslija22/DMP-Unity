@@ -11,6 +11,8 @@ public class CheckpointTimer : MonoBehaviour
     public Car_Controller carController;
     public Rigidbody carRigidbody;
 
+    public string trackId = "DefaultTrack";
+
     [Header("Checkpoint System")]
     public List<GameObject> Checkpoints = new List<GameObject>();
 
@@ -213,6 +215,12 @@ public class CheckpointTimer : MonoBehaviour
     public float GetLastLapTime() => lastLapTime;
     public float GetCurrentLapTime() => currentLapTime;
 
+    public string FormatTime(float time)
+    {
+        System.TimeSpan interval = System.TimeSpan.FromSeconds(time);
+        return string.Format("{0:D2}:{1:D2}.{2:D3}", interval.Minutes, interval.Seconds, interval.Milliseconds);
+    }
+
     private void UpdateLapTimesUI()
     {
         if (lapTimesListText == null) return;
@@ -221,7 +229,7 @@ public class CheckpointTimer : MonoBehaviour
 
         for (int i = lastLapTimes.Count - 1; i >= 0; i--)
         {
-            textOutput += $"{lastLapTimes[i]:F3}s\n";
+            textOutput += $"{FormatTime(lastLapTimes[i])}\n";
         }
 
         lapTimesListText.text = textOutput;
@@ -232,7 +240,7 @@ public class CheckpointTimer : MonoBehaviour
         PlayerPrefs.SetInt("LastLapTimesCount", lastLapTimes.Count);
         for (int i = 0; i < lastLapTimes.Count; i++)
         {
-            PlayerPrefs.SetFloat($"LastLapTimes_{i}", lastLapTimes[i]);
+            PlayerPrefs.SetFloat($"{trackId}_LastLapTimes_{i}", lastLapTimes[i]);
         }
         PlayerPrefs.Save();
     }
@@ -240,23 +248,23 @@ public class CheckpointTimer : MonoBehaviour
     private void LoadLastLapTimes()
     {
         lastLapTimes.Clear();
-        int count = PlayerPrefs.GetInt("LastLapTimesCount", 0);
+        int count = PlayerPrefs.GetInt($"{trackId}_LastLapTimesCount", 0);
 
         for (int i = 0; i < count; i++)
         {
-            float time = PlayerPrefs.GetFloat($"LastLapTimes_{i}", 0f);
+            float time = PlayerPrefs.GetFloat($"{trackId}_LastLapTimes_{i}", 0f);
             lastLapTimes.Add(time);
         }
     }
 
     private void SaveBestTimes()
     {
-        PlayerPrefs.SetFloat("BestLapTime", bestLapTime);
+        PlayerPrefs.SetFloat($"{trackId}_BestLapTime", bestLapTime);
 
-        PlayerPrefs.SetInt("BestCheckpointCount", bestCheckpointTimes.Count);
+        PlayerPrefs.SetInt($"{trackId}_BestCheckpointCount", bestCheckpointTimes.Count);
         for (int i = 0; i < bestCheckpointTimes.Count; i++)
         {
-            PlayerPrefs.SetFloat($"BestCheckpoint_{i}", bestCheckpointTimes[i]);
+            PlayerPrefs.SetFloat($"{trackId}_BestCheckpoint_{i}", bestCheckpointTimes[i]);
         }
 
         PlayerPrefs.Save();
@@ -265,13 +273,13 @@ public class CheckpointTimer : MonoBehaviour
 
     private void LoadBestTimes()
     {
-        bestLapTime = PlayerPrefs.GetFloat("BestLapTime", Mathf.Infinity);
+        bestLapTime = PlayerPrefs.GetFloat($"{trackId}_BestLapTime", Mathf.Infinity);
 
         bestCheckpointTimes.Clear();
-        int count = PlayerPrefs.GetInt("BestCheckpointCount", 0);
+        int count = PlayerPrefs.GetInt($"{trackId}_BestCheckpointCount", 0);
         for (int i = 0; i < count; i++)
         {
-            float time = PlayerPrefs.GetFloat($"BestCheckpoint_{i}", 0f);
+            float time = PlayerPrefs.GetFloat($"{trackId}_BestCheckpoint_{i}", 0f);
             bestCheckpointTimes.Add(time);
         }
         Debug.Log("Loaded best times");
