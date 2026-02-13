@@ -21766,8 +21766,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 532566635}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.011130208, y: -0.0000000022990085, z: -2.5590025e-11, w: 0.9999381}
-  m_LocalPosition: {x: 0, y: 2.2882216, z: -6.4316974}
+  m_LocalRotation: {x: 0.007870259, y: -0.70706177, z: -0.007870231, w: -0.7070642}
+  m_LocalPosition: {x: -6.4316974, y: 3.5993106, z: 6.3080397}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -29021,7 +29021,7 @@ GameObject:
   - component: {fileID: 717629078}
   - component: {fileID: 717629077}
   m_Layer: 0
-  m_Name: Terrain
+  m_Name: Terrain1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -61108,8 +61108,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1470485793}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.011130208, y: -0.0000000022990085, z: -2.5590025e-11, w: 0.9999381}
-  m_LocalPosition: {x: 0, y: 2.2882216, z: -6.4316974}
+  m_LocalRotation: {x: 0.007870259, y: -0.70706177, z: -0.007870231, w: -0.7070642}
+  m_LocalPosition: {x: -6.4316974, y: 3.5993106, z: 6.3080397}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

@@ -185,6 +185,7 @@ public class Car_Controller : MonoBehaviour
     [Space(15)]
 
     [Header("Debug Values")]
+    public float Rpm; //RPM of the car
     public float Car_Speed_KPH; //The car speed in KPH
     public float Car_Speed_MPH; //The car speed in MPH
 
@@ -452,7 +453,6 @@ public class Car_Controller : MonoBehaviour
         }
 
 
-        float Rpm = 0f;
         float minRpm = 0.7f;
         float maxRpm = 1f;
         float absSpeed = Mathf.Abs(Car_Speed_KPH);
