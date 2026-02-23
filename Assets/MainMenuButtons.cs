@@ -3,7 +3,7 @@ using UnityEngine;
 public class MainMenuButtons : MonoBehaviour
 {
     public GameObject PlayButton;
-    public GameObject RaceTrack1;
+    private GameObject RaceTrack1;
 
     public GameObject RaceTrack2;
 

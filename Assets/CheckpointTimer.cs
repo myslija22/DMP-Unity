@@ -8,6 +8,7 @@ public class CheckpointTimer : MonoBehaviour
     [Header("Race Management")]
     public GameObject startMenuUI;
     public GameObject inGameUI;
+    public GameObject settingsUI;
     public Car_Controller carController;
     public Rigidbody carRigidbody;
 
@@ -100,6 +101,7 @@ public class CheckpointTimer : MonoBehaviour
         if (startMenuUI != null) startMenuUI.SetActive(true);
 
         if (inGameUI != null) inGameUI.SetActive(false);
+
 
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.None;
