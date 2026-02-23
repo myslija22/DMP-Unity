@@ -237,7 +237,7 @@ public class CheckpointTimer : MonoBehaviour
 
     private void SaveLastLapTimes()
     {
-        PlayerPrefs.SetInt("LastLapTimesCount", lastLapTimes.Count);
+        PlayerPrefs.SetInt($"{trackId}_LastLapTimesCount", lastLapTimes.Count);
         for (int i = 0; i < lastLapTimes.Count; i++)
         {
             PlayerPrefs.SetFloat($"{trackId}_LastLapTimes_{i}", lastLapTimes[i]);
