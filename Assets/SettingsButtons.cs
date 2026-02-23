@@ -11,7 +11,6 @@ public class SettingsButtons : MonoBehaviour
 
     public GameObject minimapUI;
 
-    public float volume = 1.0f;
     FMOD.Studio.Bus masterBus;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -22,6 +21,10 @@ public class SettingsButtons : MonoBehaviour
         FMOD.Studio.System system = FMODUnity.RuntimeManager.StudioSystem;
         system.lookupID("bus:/", out guid);
         system.getBusByID(guid, out masterBus);
+
+        float savedVolume = PlayerPrefs.GetFloat("Volume", 0f);
+        masterBus.setVolume(savedVolume);
+        volumeSlider.GetComponent<UnityEngine.UI.Slider>().value = savedVolume;
     }
 
 
@@ -40,11 +43,13 @@ public class SettingsButtons : MonoBehaviour
     public void SetVolume(float volume)
     {
         masterBus.setVolume(volume);
+        PlayerPrefs.SetFloat("Volume", volume);
 
     }
 
     public void ToggleMinimap(bool showMinimap)
     {
         minimapUI.SetActive(showMinimap);
+        PlayerPrefs.SetInt("ShowMinimap", showMinimap ? 1 : 0);
     }
 }
