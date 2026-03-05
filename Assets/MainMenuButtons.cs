@@ -9,6 +9,11 @@ public class MainMenuButtons : MonoBehaviour
 
     public GameObject SelectText;
 
+    public GameObject Title;
+
+    public GameObject SmallTitle;
+
+
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     public void PlayGame()
@@ -17,6 +22,9 @@ public class MainMenuButtons : MonoBehaviour
         RaceTrack2.SetActive(true);
         SelectText.SetActive(true);
         PlayButton.SetActive(false);
+        Title.SetActive(false);
+        SmallTitle.SetActive(true);
+
 
     }
 
